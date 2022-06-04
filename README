@@ -1,0 +1,9 @@
+This is a simulation of an Etch-A-Sketch with some tweeks to it. You can find the source code on GitHub: 
+
+    1. Enter a number and click the button "New Grid". The higher the number, bigger the field
+    2. To start painting click the left mouse once and go over the tile you want to paint
+    3. To stop the painting, click one again
+
+You can start an restart as much a you like. Have Fun!
+
+This is Version 1.00 of the Etch-A-Sketch
