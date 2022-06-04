@@ -1,4 +1,4 @@
-This is a simulation of an Etch-A-Sketch with some tweeks to it. You can find the source code on GitHub: 
+This is a simulation of an Etch-A-Sketch with some tweeks to it. You can find the source code on GitHub: https://github.com/depleu/etch-a-sketch
 
     1. Enter a number and click the button "New Grid". The higher the number, bigger the field
     2. To start painting click the left mouse once and go over the tile you want to paint
