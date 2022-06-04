@@ -4,94 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <title>Etch-A-Sketch</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Lato', sans-serif;
-        }
-        .main-container {
-            padding: 1rem;
-        }
-        .info-container {
-            background: #F0F9FF;
-            border: 1px solid #BAE6FD;
-            color: #0C4A6E;
-
-            max-width: 60rem;
-
-            padding: 0.7rem 1.5rem;
-            margin: 0 auto;
-
-            line-height: 1.8;
-            font-size: 1.15rem;
-        }
-        .info-container h1 {
-            display: flex;
-            align-items: center;
-
-            margin: 0 0 0.5rem;
-        }
-        .info-container h1 svg {
-            margin-top: 5px;
-            
-            width: 2rem;
-        }
-        .input-container {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-
-            max-width: 60rem;
-
-            margin: 1rem auto;
-        }
-
-        .info-container ol {
-            padding: 0.5rem 0 0.5rem 3rem;
-
-            line-height: 1.5;
-        }
-
-        .input-container input[type=number] {
-            padding: 0.5rem;
-
-            font-size: 1.2rem;
-            
-            width: 85%;
-
-            outline: none;
-            border: 1px solid #0C4A6E;
-        }
-        .input-container button {
-            width: 15%;
-
-            background: #0C4A6E;
-            border: none;
-            color: #fff;
-
-            font-weight: 600;
-            font-size: 1.05rem;
-            cursor: pointer;
-        }
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-        }
-        .grid-container div {
-            width: 100%;
-            min-width: calc(100%/12);
-            
-            border: 1px solid #fff;
-            aspect-ratio: 1/1;
-            background: #eee;
-        }
-    </style>
 </head>
 <body>
     <div class="main-container">
@@ -121,43 +36,6 @@
         </div>
     </div>
 
-    <script>
-        const input = document.querySelector(".input-container input"),
-              button = document.querySelector(".input-container button"),
-              grid = document.querySelector(".grid-container");
-              gridShow = document.querySelector(".grid-container div");
-
-        button.addEventListener("click", generateGrid);
-
-        function generateGrid() {
-            grid.innerHTML = "";
-            grid.style.gridTemplateColumns = `repeat(${Math.ceil(Math.sqrt(input.value))}, 1fr)`;
-            for(let i = 0; i < input.value; i++) {
-                let gridDiv = document.createElement("div");
-                gridDiv.classList.add(`${i+1}`);
-                grid.appendChild(gridDiv);
-            }
-        }
-
-        grid.addEventListener("click", startColoring)
-        // Add usability for touch (still in progress)
-        grid.ontouchstart = function startTouch(e) {
-            if (!e.target.classList.contains("grid-container")) {
-                e.target.style.background = "#333";
-            }
-        }
-
-        function startColoring() {
-            grid.classList.toggle("On")
-
-            grid.addEventListener("mouseover", coloringTiles)
-
-            function coloringTiles(e) {
-                if (!e.target.classList.contains("grid-container") && grid.classList.contains("On")) {
-                    e.target.style.background = "#333";
-                }
-            }
-        }
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
