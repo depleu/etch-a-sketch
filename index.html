@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet"> 
+    <title>Etch-A-Sketch</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Lato', sans-serif;
+        }
+        .main-container {
+            padding: 1rem;
+        }
+        .info-container {
+            background: #F0F9FF;
+            border: 1px solid #BAE6FD;
+            max-width: 60rem;
+            padding: 0.7rem 1.5rem;
+            line-height: 1.4;
+            margin: 0 auto;
+            color: #0C4A6E;
+            line-height: 1.8;
+            font-size: 1.15rem;
+        }
+        .info-container h1 {
+            display: flex;
+            align-items: center;
+            margin: 0 0 0.5rem;
+        }
+        .info-container h1 svg {
+            margin-top: 5px;
+            width: 2rem;
+        }
+        .input-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 60rem;
+            margin: 1rem auto;
+        }
+
+        .info-container ol {
+            padding-left: 40px;
+            line-height: 1.5;
+        }
+
+        .input-container input[type=number] {
+            padding: 0.5rem;
+            font-size: 1.2rem;
+            width: 85%;
+            outline: none;
+            border: 1px solid #0C4A6E;
+        }
+        .input-container button {
+            width: 15%;
+            background: #0C4A6E;
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.05rem;
+            cursor: pointer;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .grid-container div {
+            width: 100%;
+            min-width: calc(100%/12);
+            border: 1px solid #fff;
+            aspect-ratio: 1/1;
+            background: #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="info-container">
+            <h1>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                </svg>
+                Instruction
+            </h1>
+            <p>
+                This is a simulation of an Etch-A-Sketch with some tweeks to it. You can find the source code on <a href="">GitHub</a>
+            </p>
+            <ol>
+                <li>Enter a number and click the button "New Grid". The higher the number, bigger the field</li>
+                <li>To start painting click the left mouse once and go over the tile you want to paint</li>
+                <li>To stop the painting, click one again</li>
+             </ol>
+             <p>You can start an restart as much a you like. Have Fun!</p>
+             <small>Version 1.00</small>
+        </div>
+        <div class="input-container">
+            <input name="gridnumber" type="number">
+            <button class="new_btn">New Grid</button>
+        </div>
+        <div class="grid-container">
+        </div>
+    </div>
+
+    <script>
+        const input = document.querySelector(".input-container input"),
+              button = document.querySelector(".input-container button"),
+              grid = document.querySelector(".grid-container");
+              gridShow = document.querySelector(".grid-container div");
+
+        button.addEventListener("click", generateGrid);
+
+        function generateGrid() {
+            grid.innerHTML = "";
+            grid.style.gridTemplateColumns = `repeat(${Math.ceil(Math.sqrt(input.value))}, 1fr)`;
+            for(let i = 0; i < input.value; i++) {
+                let gridDiv = document.createElement("div");
+                gridDiv.classList.add(`${i+1}`);
+                grid.appendChild(gridDiv);
+            }
+        }
+
+        grid.addEventListener("click", startColor)
+        grid.ontouchstart = function startTouch(e) {
+            if (!e.target.classList.contains("grid-container")) {
+                e.target.style.background = "red";
+            }
+        }
+
+        function startColor() {
+            grid.classList.toggle("On")
+            
+            grid.addEventListener("mouseover", consoleShow)
+
+            function consoleShow(e) {
+                if (!e.target.classList.contains("grid-container") && grid.classList.contains("On")) {
+                    e.target.style.background = "red";
+                }
+            }  
+        }
+    </script>
+</body>
+</html>
